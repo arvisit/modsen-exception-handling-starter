@@ -106,33 +106,43 @@
                     <uniqueVersion>false</uniqueVersion>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>${site-maven-plugin.version}</version>
-                <configuration>
-                    <message>Maven artifacts for ${project.version} at ${maven.build.timestamp}</message>
-                    <noJekyll>true</noJekyll>
-                    <outputDirectory>${project.build.directory}/mvn-artifact</outputDirectory>
-                    <branch>refs/heads/artifact</branch>
-                    <merge>true</merge>
-                    <includes>
-                        <include>**/*</include>
-                    </includes>
-                    <repositoryName>${project.name}</repositoryName>
-                    <repositoryOwner>${repository-owner}</repositoryOwner>
-                    <server>github</server>
-                    <userName>${repository-owner}</userName>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                        <phase>deploy</phase>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>github</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.github</groupId>
+                        <artifactId>site-maven-plugin</artifactId>
+                        <version>${site-maven-plugin.version}</version>
+                        <configuration>
+                            <message>Maven artifacts for ${project.version} at ${maven.build.timestamp}</message>
+                            <noJekyll>true</noJekyll>
+                            <outputDirectory>${project.build.directory}/mvn-artifact</outputDirectory>
+                            <branch>refs/heads/artifact</branch>
+                            <merge>true</merge>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <repositoryName>${project.name}</repositoryName>
+                            <repositoryOwner>${repository-owner}</repositoryOwner>
+                            <server>github</server>
+                            <userName>${repository-owner}</userName>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>site</goal>
+                                </goals>
+                                <phase>deploy</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
