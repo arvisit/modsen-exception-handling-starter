@@ -19,7 +19,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Publish package
-      if: github.event.pull_request.merged == true
       run: |
         if [[ ( "${{ github.event_name }}" = "push" ) || \
           ( "${{ github.event_name }}" = "pull_request" && "${{ github.event.pull_request.merged }}" = "true" ) ]]; then
