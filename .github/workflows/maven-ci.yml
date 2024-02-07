@@ -3,8 +3,6 @@ name: Publish package to Repository
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   deploy:
@@ -19,10 +17,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Publish package
-      run: |
-        if [[ ( "${{ github.event_name }}" = "push" ) || \
-          ( "${{ github.event_name }}" = "pull_request" && "${{ github.event.pull_request.merged }}" = "true" ) ]]; then
-          mvn --batch-mode deploy
-        fi
+      run: mvn --batch-mode deploy
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN_CLASSIC }}
