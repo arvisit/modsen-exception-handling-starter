@@ -19,6 +19,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Publish package
-      run: mvn --batch-mode deploy
+      if: github.event.pull_request.merged == true
+      run: |
+        if [[ ( "${{ github.event_name }}" = "push" ) || \
+          ( "${{ github.event_name }}" = "pull_request" && "${{ github.event.pull_request.merged }}" = "true" ) ]]; then
+          mvn --batch-mode deploy
+        fi
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN_CLASSIC }}
