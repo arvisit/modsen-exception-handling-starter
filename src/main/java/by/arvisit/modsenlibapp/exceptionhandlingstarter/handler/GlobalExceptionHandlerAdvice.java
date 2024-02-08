@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import by.arvisit.modsenlibapp.exceptionhandlingstarter.exception.ExceptionResponse;
-import by.arvisit.modsenlibapp.exceptionhandlingstarter.exception.MultiExceptionResponse;
+import by.arvisit.modsenlibapp.exceptionhandlingstarter.response.ExceptionResponse;
+import by.arvisit.modsenlibapp.exceptionhandlingstarter.response.MultiExceptionResponse;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 

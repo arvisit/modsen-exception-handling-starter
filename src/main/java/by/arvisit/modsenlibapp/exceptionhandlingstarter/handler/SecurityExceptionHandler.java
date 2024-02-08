@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import by.arvisit.modsenlibapp.exceptionhandlingstarter.exception.ExceptionResponse;
+import by.arvisit.modsenlibapp.exceptionhandlingstarter.response.ExceptionResponse;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
