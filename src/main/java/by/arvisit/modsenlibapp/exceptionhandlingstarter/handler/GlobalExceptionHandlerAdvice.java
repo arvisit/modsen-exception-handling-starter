@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import by.arvisit.modsenlibapp.exceptionhandlingstarter.exception.UsernameAlreadyExistsException;
 import by.arvisit.modsenlibapp.exceptionhandlingstarter.response.ExceptionResponse;
 import by.arvisit.modsenlibapp.exceptionhandlingstarter.response.MultiExceptionResponse;
 import jakarta.persistence.EntityNotFoundException;
@@ -59,6 +60,16 @@ public class GlobalExceptionHandlerAdvice {
     public ExceptionResponse handle(ConnectException exception) {
         return ExceptionResponse.builder()
                 .withStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .withMessage(exception.getMessage())
+                .withTimeStamp(ZonedDateTime.now(EUROPE_MINSK_TIMEZONE))
+                .build();
+    }
+
+    @ExceptionHandler(UsernameAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ExceptionResponse handle(UsernameAlreadyExistsException exception) {
+        return ExceptionResponse.builder()
+                .withStatus(HttpStatus.CONFLICT.value())
                 .withMessage(exception.getMessage())
                 .withTimeStamp(ZonedDateTime.now(EUROPE_MINSK_TIMEZONE))
                 .build();
