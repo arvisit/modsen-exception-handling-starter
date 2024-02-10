@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import by.arvisit.modsenlibapp.exceptionhandlingstarter.exception.BadRequestException;
+import by.arvisit.modsenlibapp.exceptionhandlingstarter.exception.InvalidTokenException;
 import by.arvisit.modsenlibapp.exceptionhandlingstarter.exception.UsernameAlreadyExistsException;
 import by.arvisit.modsenlibapp.exceptionhandlingstarter.response.ExceptionResponse;
 import by.arvisit.modsenlibapp.exceptionhandlingstarter.response.MultiExceptionResponse;
@@ -51,6 +53,26 @@ public class GlobalExceptionHandlerAdvice {
         return ExceptionResponse.builder()
                 .withStatus(HttpStatus.BAD_REQUEST.value())
                 .withMessage("Request body is missing or could not be read")
+                .withTimeStamp(ZonedDateTime.now(EUROPE_MINSK_TIMEZONE))
+                .build();
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse handle(BadRequestException exception) {
+        return ExceptionResponse.builder()
+                .withStatus(HttpStatus.BAD_REQUEST.value())
+                .withMessage(exception.getMessage())
+                .withTimeStamp(ZonedDateTime.now(EUROPE_MINSK_TIMEZONE))
+                .build();
+    }
+
+    @ExceptionHandler(InvalidTokenException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ExceptionResponse handle(InvalidTokenException exception) {
+        return ExceptionResponse.builder()
+                .withStatus(HttpStatus.UNAUTHORIZED.value())
+                .withMessage(exception.getMessage())
                 .withTimeStamp(ZonedDateTime.now(EUROPE_MINSK_TIMEZONE))
                 .build();
     }
