@@ -50,7 +50,7 @@ public class GlobalExceptionHandlerAdvice {
     public ExceptionResponse handle(HttpMessageNotReadableException exception) {
         return ExceptionResponse.builder()
                 .withStatus(HttpStatus.BAD_REQUEST.value())
-                .withMessage(exception.getMessage())
+                .withMessage("Request body is missing or could not be read")
                 .withTimeStamp(ZonedDateTime.now(EUROPE_MINSK_TIMEZONE))
                 .build();
     }
