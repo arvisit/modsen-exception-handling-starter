@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import by.arvisit.modsenlibapp.exceptionhandlingstarter.handler.GlobalExceptionHandlerAdvice;
+import by.arvisit.modsenlibapp.exceptionhandlingstarter.handler.SecurityExceptionHandler;
 
 @Configuration
 @ConditionalOnProperty(prefix = "exception.handling", name = "include", havingValue = "true")
@@ -16,5 +17,11 @@ public class ExceptionHandlerConfig {
     GlobalExceptionHandlerAdvice globalHandlerAdvice() {
         return new GlobalExceptionHandlerAdvice();
     }
-    
+
+    @Bean
+    @ConditionalOnMissingBean
+    SecurityExceptionHandler securityExceptionHandler() {
+        return new SecurityExceptionHandler();
+    }
+
 }

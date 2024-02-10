@@ -1,4 +1,4 @@
-package by.arvisit.modsenlibapp.exceptionhandlingstarter.exception;
+package by.arvisit.modsenlibapp.exceptionhandlingstarter.response;
 
 import java.time.ZonedDateTime;
 
