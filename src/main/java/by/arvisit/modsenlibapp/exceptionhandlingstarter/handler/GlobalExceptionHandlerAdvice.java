@@ -37,6 +37,16 @@ public class GlobalExceptionHandlerAdvice {
                 .build();
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse handle(IllegalArgumentException exception) {
+        return ExceptionResponse.builder()
+                .withStatus(HttpStatus.BAD_REQUEST.value())
+                .withMessage(exception.getMessage())
+                .withTimeStamp(ZonedDateTime.now(EUROPE_MINSK_TIMEZONE))
+                .build();
+    }
+
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public ExceptionResponse handle(HttpRequestMethodNotSupportedException exception) {
