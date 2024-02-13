@@ -130,7 +130,7 @@ public class GlobalExceptionHandlerAdvice {
         Map<String, String> errors = new HashMap<>();
         exception.getConstraintViolations()
                 .forEach(constraintViolation -> constraintViolation.getPropertyPath()
-                        .forEach(error -> errors.put(error.getName(), constraintViolation.getMessage())));
+                        .forEach(error -> errors.put(constraintViolation.getMessage(), error.getName())));
         return MultiExceptionResponse.builder()
                 .withStatus(HttpStatus.BAD_REQUEST.value())
                 .withMessages(errors)
